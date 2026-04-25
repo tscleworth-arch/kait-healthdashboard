@@ -349,7 +349,7 @@
 
   <div class="banner banner-amber">
     <div class="banner-title">What her genetics mean — in plain terms</div>
-    <p>Kaitlyn's DNA test flagged a few things worth paying attention to. The most important: she has one copy of a gene variant (MTHFR) that makes her body less efficient at processing certain B vitamins — specifically, converting folate into the form her body can actually use. This affects things like energy, detoxification, and how well her cells repair themselves. She also has two copies of a variant (SOD2) that reduces her cells' ability to neutralize oxidative stress — essentially, her "internal rust protection" isn't as strong as average. Neither of these is a disease or a diagnosis, but together they mean her body could use some extra support right now, especially while healing from surgery. The good news: both are manageable with the right supplements (see the Supplement Stack tab). Everything else in her genetic report is either normal or favorable — no iron overload risk, no clotting disorder, good cholesterol genetics.</p>
+    <p>Kaitlyn's DNA has been verified against her raw AncestryDNA file — every variant below is allele-confirmed. The most important for daily life: she has <strong>two copies</strong> of the MTHFR C677T variant (homozygous TT, no 1298C compounding) — her body runs the folate-to-methylfolate conversion at roughly 30–35% efficiency. She also has slow COMT (homozygous — heightened pain sensitivity, directly relevant for surgical recovery), homozygous NQO1 (can't recycle CoQ10 — must use ubiquinol form), and homozygous COQ2 (can't build CoQ10 efficiently either — triple CoQ10 deficit). The biggest medical flag is a BRCA2 variant — formal genetic counseling is the top priority. There are also cardiac (DSC2, homozygous) and clotting (SERPINE1) variants to discuss with her doctors. On the positive side: APOE e2/e3 (great cholesterol genetics), normal liver detox (GSTP1 clear), and no trouble digesting dairy.</p>
   </div>
 
   <div class="banner banner-green">
@@ -806,42 +806,72 @@
 
     <div class="mut-card">
       <div class="mut-header">
-        <span class="mut-gene">MTHFR — C677T (p.Ala222Val)</span>
-        <span class="zygosity-het">Heterozygous (TC)</span>
+        <span class="mut-gene">MTHFR — C677T</span>
+        <span class="zygosity-hom">Homozygous (TT)</span>
         <span class="mut-rsid">rs1801133 · CADD 25.5</span>
       </div>
-      <div class="mut-body">Think of MTHFR as the enzyme responsible for turning the folate you eat (from food or supplements) into the version your body can actually use. Kaitlyn has one copy of a variant that makes this enzyme run at about 60–65% efficiency instead of 100%. That's not a crisis, but it means her body is less effective at a process called methylation — which affects everything from how well she detoxifies to how her brain makes feel-good chemicals, to how efficiently her cells repair themselves. It's particularly relevant right now because surgery puts extra demand on all of those systems. The practical fix is straightforward: take the pre-converted form of folate (methylfolate) instead of regular folic acid, so her body doesn't have to do the conversion at all.</div>
-      <div class="mut-action">Action: take methylfolate (not regular folic acid) + methylcobalamin B12 · ask your doctor to run a homocysteine blood test to see if this is causing any real-world impact</div>
+      <div class="mut-body">MTHFR is the enzyme that converts folate from food and supplements into the active form the body can actually use. Having two copies of this variant (homozygous TT) means that enzyme runs at roughly 30–35% of normal efficiency — more than twice as impaired as having just one copy. This affects a critical body process called methylation, which touches everything from how well cells repair themselves to how the brain makes serotonin and dopamine, to how efficiently the liver detoxifies waste products. For Kaitlyn specifically — recovering from major surgery right now — her body's repair and detox demands are at a peak while the underlying machinery is running significantly below capacity. The fix is well understood: take the pre-converted, active form of folate (methylfolate) so the body skips the broken conversion step entirely.</div>
+      <div class="mut-action">Action: methylfolate (L-5-MTHF, not regular folic acid) + methylcobalamin B12 + P5P B6 · get a homocysteine blood test — if elevated, confirms real-world methylation impact and guides supplement dosing · note: raw DNA confirmed she does NOT carry the A1298C variant — this is C677T homozygous only, not compound heterozygous</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">MTRR — Ile22Met</span>
+        <span class="zygosity-het">Heterozygous (AG)</span>
+        <span class="mut-rsid">rs1801394 · CADD 20.9</span>
+      </div>
+      <div class="mut-body">MTRR is a helper enzyme that keeps the body's B12-dependent methylation machinery running — think of it as the maintenance crew for the engine that MTHFR feeds into. This variant reduces how efficiently the body regenerates the active form of B12 used in the methylation cycle. Combined with homozygous MTHFR, these two variants compound each other — more methylation impairment than either alone. The protocol needs to address both the folate side (methylfolate) and the B12 side (methylcobalamin) to adequately compensate for both.</div>
+      <div class="mut-action">Action: reinforces the need for methylcobalamin B12 specifically — not cyanocobalamin · sublingual delivery is most effective · don't skip the B12 component of the methylation stack</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">COMT — Val158Met</span>
+        <span class="zygosity-hom">Homozygous (AA)</span>
+        <span class="mut-rsid">rs4680 · CADD 13.15</span>
+      </div>
+      <div class="mut-body">COMT is the enzyme responsible for clearing dopamine and adrenaline from the brain and nervous system after they've done their job — think of it as the brake on stress chemicals. Kaitlyn has two copies of the slow version, meaning dopamine and stress hormones linger in her system longer than average. In practice this means heightened pain sensitivity, stronger emotional reactions, and more reactivity to stress than most people. This is clinically relevant right now: her nervous system is wired to amplify pain signals more than the average person, which means proactive pain management and stress reduction during recovery are particularly important. This is worth communicating directly to Dr. Savoie's team so post-op pain management is appropriately calibrated.</div>
+      <div class="mut-action">Action: tell Dr. Savoie's team she has slow COMT and heightened pain sensitivity · prioritize stress management and sleep during recovery · magnesium glycinate can support nervous system calm · avoid stimulants (caffeine, etc.) during recovery window</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">NQO1 — Pro187Ser</span>
+        <span class="zygosity-hom">Homozygous (AA)</span>
+        <span class="mut-rsid">rs1800566 · CADD 24.8</span>
+      </div>
+      <div class="mut-body">NQO1 recycles CoQ10 — cells use CoQ10 like a rechargeable battery to make energy and neutralize cellular waste. NQO1 is the charger. Kaitlyn has two copies of a variant that breaks the charger — her body cannot efficiently recycle CoQ10 from its used-up form back to its active form. This has two practical consequences: first, her cells are more vulnerable to oxidative damage than her SOD2 result alone would suggest; second, standard CoQ10 supplements (ubiquinone) won't work well because her body can't recharge them. She specifically needs the pre-charged form — ubiquinol — which bypasses the NQO1 recycling step. Critically, she also has homozygous COQ2 (see below), meaning she can't build CoQ10 efficiently in the first place either. The combination of COQ2 (can't make it) + NQO1 (can't recycle it) + SOD2 (higher demand for it) represents a significant triple deficit in CoQ10 availability.</div>
+      <div class="mut-action">Action: must use ubiquinol CoQ10 (not ubiquinone) — this distinction matters more for her than almost anyone · 200–300mg daily minimum given triple COQ2/NQO1/SOD2 compounding · also relevant for cancer risk monitoring given NQO1's role in stabilizing the p53 tumor suppressor</div>
     </div>
 
     <div class="mut-card">
       <div class="mut-header">
         <span class="mut-gene">SOD2 — Val16Ala</span>
-        <span class="zygosity-hom">Homozygous (AA)</span>
+        <span class="zygosity-het">Heterozygous (AG)</span>
         <span class="mut-rsid">rs4880 · CADD 13.03</span>
       </div>
-      <div class="mut-body">Every cell in your body produces a small amount of "exhaust" as a natural byproduct of making energy — similar to how a car engine produces emissions. SOD2 is the enzyme that cleans up that exhaust before it damages the cell. Kaitlyn has two copies of a variant that makes this cleanup enzyme less effective at getting where it needs to go inside the cell. The result is that her cells accumulate slightly more oxidative "wear and tear" than average, especially during demanding periods — like recovering from major surgery, which is one of the highest-oxidative-stress events the body goes through. The supplement CoQ10 (in its active form, ubiquinol) helps compensate for this directly. This isn't dangerous on its own, but it does mean her body needs a little extra antioxidant support to heal well.</div>
-      <div class="mut-action">Action: ubiquinol CoQ10 (active form — look for "ubiquinol" not "ubiquinone") · NAC supplement · eat colorful fruits and vegetables · prioritize sleep during recovery — that's when cellular repair happens</div>
-    </div>
-
-    <div class="mut-card">
-      <div class="mut-header">
-        <span class="mut-gene">GSTP1 — Ile105Val</span>
-        <span class="zygosity-het">Variant present (heterozygous)</span>
-        <span class="mut-rsid">rs1695 · CADD 0.035</span>
-      </div>
-      <div class="mut-body">The liver has a two-step system for processing and removing toxins and waste products from the body. GSTP1 is one of the key enzymes in step two — it packages up harmful substances so they can be safely flushed out. Kaitlyn has a variant that makes this enzyme slightly less efficient. Combined with her SOD2 variant (which means more cellular waste is being produced), her liver's cleanup system is being asked to do more with slightly less capacity. This isn't a problem in everyday life, but it does mean she should be mindful about not overloading her system with unnecessary medications or alcohol during recovery, and that eating foods like broccoli, kale, and cabbage can actually help activate this pathway.</div>
-      <div class="mut-action">Action: NAC supplement supports the detox pathway · eat cruciferous vegetables regularly (broccoli, kale, Brussels sprouts) · avoid unnecessary medications during recovery · limit alcohol</div>
+      <div class="mut-body">SOD2 is the main antioxidant enzyme inside mitochondria — it neutralizes cellular "exhaust" before it damages surrounding cells. Kaitlyn has one copy of the variant (heterozygous, not two copies as previously noted — less severe). However, combined with her homozygous NQO1 variant (broken CoQ10 charger), her overall mitochondrial antioxidant capacity is still meaningfully reduced. Think of it as having both a weaker exhaust scrubber and a broken battery charger at the same time — the compounding effect matters, especially during surgery recovery when cell repair is at its peak.</div>
+      <div class="mut-action">Action: ubiquinol CoQ10 addresses both this and NQO1 · NAC supports glutathione, the body's backup antioxidant system · colorful antioxidant-rich foods · prioritize sleep — that's when cellular repair happens most</div>
     </div>
 
     <div class="mut-card">
       <div class="mut-header">
         <span class="mut-gene">ADD1 — Gly460Trp</span>
-        <span class="zygosity-het">Heterozygous (AG)</span>
+        <span class="zygosity-hom">Homozygous (TT)</span>
         <span class="mut-rsid">rs4961 · CADD 31</span>
       </div>
-      <div class="mut-body">This gene affects how the kidneys handle salt. Most people's kidneys let excess sodium pass through in urine — Kaitlyn's kidneys are genetically inclined to hold onto more of it than average. That matters because when your body retains extra sodium, it retains extra water with it, which raises blood pressure. She doesn't have high blood pressure now, and this variant alone won't cause it — but it does mean she's more sensitive to salty diets than the average person. If she were to eat a consistently high-sodium diet over time, her blood pressure would likely respond more than most people's would. Easy to manage: watch the salt, eat more potassium-rich foods (which help offset sodium's effects), and keep an eye on blood pressure readings.</div>
-      <div class="mut-action">Action: go easy on salt and processed/fast foods · eat potassium-rich foods (bananas, avocado, sweet potato, leafy greens) · check blood pressure monthly — flag anything consistently above 125/80</div>
+      <div class="mut-body">This gene controls how the kidneys handle salt. Having two copies of this variant means Kaitlyn's kidneys are strongly programmed to hold onto more sodium than average — significantly more sensitive to salty diets than one copy would produce. When the body retains extra sodium, it holds water with it, which raises blood pressure. She doesn't currently have high blood pressure, but this is a meaningful lifelong risk factor. Homozygous (two copies) roughly doubles the risk compared to one copy, and the CADD score of 31 puts this among the most functionally significant variants in her profile. The good news: entirely manageable with diet and monitoring.</div>
+      <div class="mut-action">Action: keep dietary sodium moderate — limit processed foods, fast food, and salty snacks · eat potassium-rich foods daily (bananas, avocado, sweet potato, leafy greens) · check blood pressure monthly, flag anything consistently at or above 125/80</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">GSTP1 — Ile105Val</span>
+        <span class="zygosity-ok">Normal (reference allele)</span>
+        <span class="mut-rsid">rs1695</span>
+      </div>
+      <div class="mut-body">Good news: this updated report shows GSTP1 as normal for Kaitlyn, correcting a prior analysis. Her liver's phase II detoxification enzyme is fully functional — the glutathione-based cleanup system that processes toxins and cellular waste is running at full capacity. One fewer thing to worry about.</div>
+      <div class="mut-action">No action needed — liver detox pathway is normal</div>
     </div>
 
     <div class="mut-card">
@@ -850,8 +880,8 @@
         <span class="zygosity-het">Heterozygous (TC)</span>
         <span class="mut-rsid">rs7412 · CADD 25.1</span>
       </div>
-      <div class="mut-body">APOE is a gene involved in how the body processes fats and cholesterol. There are three main versions — e2, e3, and e4. Most people have two copies of e3. Kaitlyn has one e2 and one e3, which is actually a favorable combination: the e2 version is associated with lower LDL ("bad") cholesterol and a lower risk of Alzheimer's disease compared to people who carry e4. The one thing to be aware of is that e2 carriers can sometimes see triglycerides (a type of fat in the blood) run a bit high if their diet is heavy in saturated fat. That's easily managed with diet and a simple blood test once a year. Overall this is a good-news genetic finding.</div>
-      <div class="mut-action">Favorable variant overall · get an annual cholesterol panel · keep an eye on triglycerides specifically · moderate red meat and fried foods</div>
+      <div class="mut-body">APOE affects how the body processes fats and cholesterol. Most people have two copies of the e3 version. Kaitlyn has one e2 and one e3 — a favorable combination linked to lower LDL cholesterol and reduced Alzheimer's risk compared to anyone carrying e4. The one caveat: e2 carriers can occasionally see triglycerides run high with a high saturated fat diet. An annual cholesterol panel catches this easily. Overall, a good-news finding.</div>
+      <div class="mut-action">Favorable variant overall · annual cholesterol panel · keep saturated fat moderate · monitor triglycerides specifically</div>
     </div>
 
     <div class="mut-card">
@@ -860,43 +890,95 @@
         <span class="zygosity-het">Heterozygous (TC)</span>
         <span class="mut-rsid">rs1061170</span>
       </div>
-      <div class="mut-body">The retina at the back of your eye has a self-cleaning system that removes cellular debris as it builds up over time. CFH is a protein that helps regulate that process. Kaitlyn has one copy of a variant that makes this cleanup system less efficient, which over decades can lead to a buildup of deposits in the central part of the retina — the condition known as age-related macular degeneration (AMD), which affects sharp central vision. This is a long-term risk, not an immediate problem — AMD typically shows up after age 60. But it's worth knowing about now because there are straightforward things she can do to slow it down: a specific eye supplement (lutein and zeaxanthin), regular dilated eye exams so any early changes are caught, and avoiding smoking, which dramatically accelerates AMD in people with this variant.</div>
-      <div class="mut-action">Action: start lutein + zeaxanthin supplement now · get a dilated eye exam to establish a baseline · annual eye exams going forward · don't smoke — smoking is the single biggest accelerator of AMD risk with this variant</div>
+      <div class="mut-body">The retina has a self-cleaning system that removes cellular debris over time. CFH is a protein that regulates that process. One copy of this variant makes the cleanup less efficient, which over decades can lead to debris buildup in the central retina — age-related macular degeneration (AMD), affecting sharp central vision. This is a long-term risk that typically surfaces after 60, not an immediate concern. Knowing now means she can take protective steps: a specific eye supplement (lutein and zeaxanthin), dilated eye exams to track any early changes, and absolutely avoiding smoking, which dramatically accelerates AMD risk with this variant.</div>
+      <div class="mut-action">Action: start lutein + zeaxanthin supplement · get a dilated eye exam for baseline · annual exams going forward · don't smoke — it's the single biggest accelerator of AMD risk</div>
     </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">TCF7L2 — Type 2 diabetes susceptibility</span>
+        <span class="zygosity-het">Heterozygous (AT)</span>
+        <span class="mut-rsid">rs7903146</span>
+      </div>
+      <div class="mut-body">TCF7L2 is one of the strongest and most studied genetic risk factors for type 2 diabetes — it affects how the pancreas produces insulin and how cells respond to it. Having one copy of this variant meaningfully raises lifetime diabetes risk compared to non-carriers. That said, her current HbA1c of 4.7% is excellent — zero blood sugar problems right now. This is more of a long-term watchpoint than a current concern, and it's highly modifiable: diet and regular exercise are the most powerful tools against this particular genetic risk.</div>
+      <div class="mut-action">Action: HbA1c check annually · limit refined carbohydrates and added sugar long-term · stay physically active — exercise is the most powerful modifier of this genetic risk</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">SERPINE1 — PAI-1 clotting regulator</span>
+        <span class="zygosity-het">Heterozygous (AC)</span>
+        <span class="mut-rsid">rs6092</span>
+      </div>
+      <div class="mut-body">SERPINE1 produces PAI-1, a protein involved in controlling how the body breaks down blood clots. This variant is linked to PAI-1 deficiency, which can affect clot dissolution — meaning prolonged bleeding or difficulty clearing clots. Given Kaitlyn just had surgery involving vascular work around the subclavian artery and vein, this is relevant context her surgical team should have. It doesn't mean she has a clotting disorder, but it warrants being in her medical record. Report any unusual prolonged bruising or bleeding during recovery.</div>
+      <div class="mut-action">Action: flag this variant to Dr. Savoie's team for her surgical file · report any unusual prolonged bruising or bleeding · this is a medical conversation item, not a supplement item</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">DSC2 — Cardiac arrhythmia risk</span>
+        <span class="zygosity-hom">Homozygous (TT)</span>
+        <span class="mut-rsid">rs61731921</span>
+      </div>
+      <div class="mut-body">DSC2 encodes a protein that holds heart muscle cells together. Variants in this gene are associated with arrhythmogenic right ventricular cardiomyopathy (ARVC) — a condition where heart muscle can gradually be replaced by fatty or fibrous tissue, potentially causing abnormal heart rhythms. Kaitlyn has two copies of this variant (homozygous), which is more significant than one copy. This does not automatically mean she has ARVC — penetrance is variable and this specific ClinVar entry has limited submissions — but homozygous status warrants formal cardiac evaluation: an EKG and echocardiogram at minimum. Any family history of unexplained heart rhythm problems or sudden cardiac events is important context for a cardiologist.</div>
+      <div class="mut-action">Action: discuss with her doctor — request an EKG and echocardiogram · share any family history of heart rhythm issues or sudden cardiac events · this is a medical evaluation item</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">BRCA2 — Breast/ovarian cancer risk</span>
+        <span class="zygosity-het">Heterozygous (TC) · rare variant 0.4% frequency</span>
+        <span class="mut-rsid">rs28897727 · CADD 15.81</span>
+      </div>
+      <div class="mut-body">BRCA2 is one of the most well-known cancer-related genes — it helps repair damaged DNA and suppress tumor growth. Kaitlyn has a heterozygous variant in BRCA2 that ClinVar flags as associated with breast and/or ovarian cancer. This is a rare variant (present in only 0.4% of the population) with 31 ClinVar submissions, indicating real clinical attention to it. This genetic report does not replace formal clinical genetic testing — a certified genetic counselor using a diagnostic-grade BRCA test is the appropriate next step. This finding should be discussed with her doctor as soon as possible. It also has implications for first-degree family members, including her siblings.</div>
+      <div class="mut-action">Action: this is the highest-priority medical follow-up in the entire report · discuss with primary care doctor and request referral to a certified genetic counselor for formal BRCA diagnostic testing · inform first-degree family members (especially sisters and daughters) so they can consider testing</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">TP53 — Codon 72 polymorphism</span>
+        <span class="zygosity-hom">Homozygous (TT)</span>
+        <span class="mut-rsid">rs1042522 · CADD 9.78</span>
+      </div>
+      <div class="mut-body">TP53 is often called the "guardian of the genome" — it's a tumor suppressor gene that detects DNA damage and triggers repair or cell death before cancer can develop. The codon 72 variant is a common functional polymorphism (not the same as a rare pathogenic TP53 mutation). Its clinical significance is nuanced and context-dependent. The relevant practical point: having both NQO1 (broken CoQ10 charger) and this TP53 variant together means her DNA surveillance system benefits most from robust antioxidant and methylation support — which the supplement stack addresses. This is not a cause for alarm on its own.</div>
+      <div class="mut-action">Moderate watchpoint — supports the rationale for the full supplement stack (methylation + ubiquinol CoQ10) · not the same as a rare pathogenic TP53 mutation · mention to doctor if concerned, especially in light of the BRCA2 finding</div>
+    </div>
+
   </div>
 
-  <div class="section-label">Favorable / normal variants</div>
+  <div class="section-label">Additional variants of note</div>
   <div class="card">
     <div class="mut-card">
       <div class="mut-header">
-        <span class="mut-gene">COMT — Val158Met</span>
-        <span class="zygosity-ok">Normal (AA reference allele)</span>
-        <span class="mut-rsid">rs4680 · CADD 13.15</span>
+        <span class="mut-gene">COQ2 — CoQ10 synthesis + statin sensitivity</span>
+        <span class="zygosity-hom">Homozygous (GG) — corrected from GenVue</span>
+        <span class="mut-rsid">rs4693075</span>
       </div>
-      <div class="mut-body">COMT is the enzyme that clears dopamine and adrenaline from the brain after they've done their job. Some people have a "slow" version of this gene, which means those chemicals linger longer — often associated with heightened pain sensitivity, anxiety, and stress reactivity. Kaitlyn has the normal, efficient version. In the context of her surgery, this is a meaningful positive: it suggests she'll have a more typical response to pain management and anesthesia, and that her stress response system is working as expected. Nothing to worry about here.</div>
-      <div class="mut-action">Favorable — no special considerations needed</div>
+      <div class="mut-body">COQ2 is the enzyme that actually builds CoQ10 from scratch in the body. Having two copies of this variant (confirmed homozygous in the raw DNA file — GenVue incorrectly listed it as heterozygous) means her CoQ10 production pathway may be less efficient at baseline. Combined with her homozygous NQO1 (can't recycle CoQ10) and heterozygous SOD2 (higher antioxidant demand), this creates a triple compounding effect on CoQ10 availability. The ClinVar flag here is specifically for atorvastatin (Lipitor) toxicity — if she is ever prescribed a statin for cholesterol, she is at elevated risk for statin-induced muscle pain or damage. This should be flagged to any prescribing physician before starting statins.</div>
+      <div class="mut-action">Action: ubiquinol CoQ10 supplementation is even more critical given this finding · if ever prescribed statins, inform the prescribing doctor of this variant — CoQ10 supplementation alongside statins is protective · raw DNA confirmed: homozygous (GG), not heterozygous as GenVue reported</div>
     </div>
 
     <div class="mut-card">
       <div class="mut-header">
-        <span class="mut-gene">NQO1 — Pro187Ser</span>
-        <span class="zygosity-ok">Normal (GG reference allele)</span>
-        <span class="mut-rsid">rs1800566 · CADD 24.8</span>
+        <span class="mut-gene">NAT2 — Slow drug metabolizer</span>
+        <span class="zygosity-hom">Two homozygous variants: rs1041983 + rs1799930</span>
+        <span class="mut-rsid">NAT2 gene</span>
       </div>
-      <div class="mut-body">NQO1 is an enzyme that, among other things, helps recycle CoQ10 — a compound her supplement stack includes to support the SOD2 deficiency. Think of CoQ10 like a rechargeable battery inside cells. NQO1 is the charger. Some people have a variant that breaks the charger, meaning CoQ10 supplements don't work as well for them. Kaitlyn has the normal version — her "charger" works fine, which means the CoQ10 she takes will be recycled and used efficiently. Good news that makes her supplement stack more effective.</div>
-      <div class="mut-action">Favorable — CoQ10 supplementation will work as intended</div>
+      <div class="mut-body">NAT2 controls how the liver processes certain drugs and environmental chemicals. Having two homozygous variants here makes Kaitlyn a likely "slow acetylator," meaning some medications are processed more slowly than average and can build up to higher levels in the body. This is a drug metabolism consideration worth noting to any prescribing physician — particularly relevant if she's ever prescribed certain antibiotics or other drugs that go through the NAT2 pathway, as dose adjustments may be appropriate.</div>
+      <div class="mut-action">Action: mention "slow NAT2 acetylator" to any prescribing physician · most relevant for isoniazid, hydralazine, procainamide, and related drugs</div>
     </div>
 
     <div class="mut-card">
       <div class="mut-header">
         <span class="mut-gene">LCT/MCM6 — Lactase persistence</span>
-        <span class="zygosity-ok">Homozygous (AA) — persistence variant</span>
-        <span class="mut-rsid">rs4988235 · CADD 13.46</span>
+        <span class="zygosity-ok">Homozygous (AA) — favorable</span>
+        <span class="mut-rsid">rs4988235</span>
       </div>
-      <div class="mut-body">Most people in the world lose the ability to comfortably digest dairy as they get older — that's lactose intolerance, and it's actually the genetic norm for humans. Kaitlyn has two copies of a gene variant that keeps her dairy-digesting enzyme (lactase) active for life. She can eat dairy without issue, which is good news nutritionally — especially now, when she needs adequate calcium and protein to support bone healing from her surgery.</div>
-      <div class="mut-action">No action needed — dairy is fine and actually helpful during bone recovery</div>
+      <div class="mut-body">Most people in the world lose the ability to digest dairy comfortably as they get older. Kaitlyn has two copies of a variant that keeps her dairy-digesting enzyme active for life — no lactose intolerance genetically. She can eat dairy freely, which is nutritionally helpful right now given her need for calcium and protein during bone healing.</div>
+      <div class="mut-action">No action needed — dairy is fine and beneficial during bone recovery</div>
     </div>
   </div>
+</div>
 </div>
 
 <!-- ══════════════════════════════════
@@ -905,40 +987,39 @@
 <div id="tab-supplements" class="page">
 
   <div class="banner banner-amber">
-    <div class="banner-title">Post-surgical clearance required before starting NAC</div>
-    <p>Clear all new supplements with Dr. Savoie's team before initiating. NAC may affect platelet aggregation acutely and should be confirmed safe in the early post-operative window. Methylfolate, B12, D3/K2, and lutein are generally safe to begin immediately but confirm with your surgical team.</p>
+    <div class="banner-title">Post-surgical clearance — discuss with Dr. Savoie's team before starting</div>
+    <p>Get sign-off from Dr. Savoie's team before beginning any new supplements. NAC specifically may affect platelet aggregation and should be confirmed safe during the early post-operative window. Methyl Guard Plus, D3/K2, ubiquinol CoQ10, and lutein are generally lower-risk but her surgical team should have visibility into everything she's taking. Additionally — Methyl Guard Plus should be started slowly (1 cap/day) given her homozygous slow COMT, and ideally introduced after she's past the acute recovery phase and not managing multiple new variables simultaneously.</p>
   </div>
 
   <div class="card">
     <div class="supp-row">
       <div class="supp-num">1</div>
       <div>
-        <div class="supp-name">Methylfolate (L-5-MTHF) — 400–800 mcg daily</div>
-        <div class="supp-detail">Active form of folate that bypasses the MTHFR conversion step entirely. Critical for methylation cycle function, homocysteine-to-methionine conversion, and neurotransmitter synthesis. Post-surgery and during recovery, methylation demand increases. Do not substitute with folic acid — unmetabolized folic acid can accumulate with MTHFR variants and may have adverse effects. Take with food.</div>
-        <a class="supp-buy" href="https://www.amazon.com/s?k=methylfolate+L-5-MTHF+400mcg" target="_blank">Search on Amazon</a>
+        <div class="supp-name">Thorne Methyl Guard Plus — 1 capsule daily to start, increase to 2 after 2–3 weeks</div>
+        <div class="supp-detail">
+          A single product that covers the full methylation stack in one formula — methylfolate (L-5-MTHF), methylcobalamin B12, P5P (active B6), riboflavin (B2), and betaine (TMG). Each of these matters for her specifically:<br><br>
+          <strong>Methylfolate (1,700 mcg at full dose)</strong> — bypasses the broken MTHFR C677T conversion step. Do not substitute regular folic acid.<br><br>
+          <strong>Methylcobalamin B12 (1,000 mcg)</strong> — pairs with methylfolate to complete the cycle. Also addresses her MTRR variant, which impairs B12 regeneration.<br><br>
+          <strong>Riboflavin B2 (30 mg)</strong> — a cofactor that helps stabilize the MTHFR enzyme itself. Research specifically on homozygous TT genotype shows B2 meaningfully improves residual enzyme function. Often missed in DIY methylation stacks.<br><br>
+          <strong>Betaine/TMG (1,500 mg)</strong> — provides a backup methylation pathway (BHMT) that donates methyl groups independently of MTHFR. Important for homozygous TT where the primary pathway is significantly impaired.<br><br>
+          <strong>Important — start low given homozygous slow COMT:</strong> She has both homozygous MTHFR (needs methylfolate) and homozygous slow COMT (may react to too much too fast). High-dose methylfolate drives up SAMe, which COMT uses to clear dopamine — if COMT is slow, this can cause the system to back up, producing anxiety, irritability, or poor sleep. Start at 1 capsule daily for 2–3 weeks and pay attention to how she feels. If she tolerates it well, move to the full 2-capsule dose. If she feels overstimulated or anxious, drop back and reassess with a practitioner.<br><br>
+          <strong>Do not start during acute surgical recovery</strong> — wait until cleared by Dr. Savoie's team. Run it by whoever is managing her post-surgical care before beginning.
+        </div>
+        <a class="supp-buy" href="https://www.amazon.com/s?k=thorne+methyl+guard+plus" target="_blank">Search Thorne Methyl Guard Plus on Amazon</a>
       </div>
     </div>
 
     <div class="supp-row">
       <div class="supp-num">2</div>
       <div>
-        <div class="supp-name">Methylcobalamin B12 — 1,000 mcg daily</div>
-        <div class="supp-detail">Active methylated form of B12 that pairs with methylfolate to complete the methylation cycle. Works synergistically to convert homocysteine to methionine. Methyl form is preferred over cyanocobalamin for MTHFR variant carriers. Sublingual delivery is most bioavailable — dissolve under tongue rather than swallowing. Take in the morning as B12 can be energizing.</div>
-        <a class="supp-buy" href="https://www.amazon.com/s?k=methylcobalamin+B12+1000mcg+sublingual" target="_blank">Search on Amazon</a>
-      </div>
-    </div>
-
-    <div class="supp-row">
-      <div class="supp-num">3</div>
-      <div>
-        <div class="supp-name">Ubiquinol CoQ10 — 200 mg daily</div>
-        <div class="supp-detail">The active reduced form of CoQ10 (ubiquinol vs. ubiquinone) — directly supports mitochondrial antioxidant function downstream of the SOD2 deficiency, helping neutralize reactive oxygen species that SOD2 cannot fully manage. Critical during surgical recovery when oxidative stress is elevated. Her NQO1 is normal so she'll recycle CoQ10 efficiently. Take with a fat-containing meal for optimal absorption.</div>
+        <div class="supp-name">Ubiquinol CoQ10 — 200–300 mg daily</div>
+        <div class="supp-detail">The active, pre-charged form of CoQ10 — and the only form that will work for Kaitlyn. Raw DNA cross-reference confirmed a triple compounding deficit: COQ2 (can't build CoQ10 efficiently), NQO1 (can't recycle it), and SOD2 (higher demand for it). Standard ubiquinone supplements are useless for her because her body can neither make nor recharge them. Ubiquinol is pre-charged and bypasses both broken steps. At 200–300mg daily this is arguably the most important supplement in her stack. Take with a fat-containing meal — CoQ10 is fat-soluble.</div>
         <a class="supp-buy" href="https://www.amazon.com/s?k=ubiquinol+CoQ10+200mg" target="_blank">Search on Amazon</a>
       </div>
     </div>
 
     <div class="supp-row">
-      <div class="supp-num">4</div>
+      <div class="supp-num">3</div>
       <div>
         <div class="supp-name">NAC (N-Acetyl Cysteine) — 600 mg daily</div>
         <div class="supp-detail">Rate-limiting precursor to glutathione — the body's master antioxidant and detoxification molecule. Supports both GSTP1 pathway function (phase II liver detox) and SOD2 compensation. Glutathione is also critical for wound healing and immune modulation post-surgery. <strong>Note: Confirm timing with Dr. Savoie before initiating</strong> — NAC can transiently affect platelet aggregation. Do not take within 2 hours of meloxicam.</div>
@@ -947,7 +1028,7 @@
     </div>
 
     <div class="supp-row">
-      <div class="supp-num">5</div>
+      <div class="supp-num">4</div>
       <div>
         <div class="supp-name">Lutein + Zeaxanthin — 20 mg / 4 mg daily</div>
         <div class="supp-detail">Macular pigment carotenoids that concentrate in the retina and macula, acting as both optical blue-light filters and direct antioxidants. Directly protective against AMD progression — the primary risk from her CFH heterozygous variant. Dosing matches AREDS2 clinical trial evidence. Take with a fat-containing meal for absorption — carotenoids are fat-soluble.</div>
@@ -956,7 +1037,7 @@
     </div>
 
     <div class="supp-row">
-      <div class="supp-num">6</div>
+      <div class="supp-num">5</div>
       <div>
         <div class="supp-name">Vitamin D3 + K2 (MK-7) — 2,000 IU D3 / 100 mcg K2 daily</div>
         <div class="supp-detail">Maintenance dosing only — her current D level of 67 ng/mL is excellent and does not require loading. K2 (MK-7 form specifically) ensures calcium driven by Vitamin D absorption is directed to bone matrix rather than arterial soft tissue. Particularly relevant during SC joint bone healing post-surgery. Do not increase D dose beyond 2,000 IU given current optimal level — retest in 6 months.</div>
@@ -969,7 +1050,7 @@
   <div class="card">
     <div class="lab-row">
       <div><div class="lab-name">Morning (with breakfast)</div></div>
-      <div style="text-align:right;font-size:13px;color:var(--ink-muted);">Methylcobalamin B12 (sublingual) · Methylfolate · D3/K2</div>
+      <div style="text-align:right;font-size:13px;color:var(--ink-muted);">Methyl Guard Plus (1 cap to start) · D3/K2</div>
     </div>
     <div class="lab-row">
       <div><div class="lab-name">With lunch or largest fat-containing meal</div></div>
@@ -977,11 +1058,15 @@
     </div>
     <div class="lab-row">
       <div><div class="lab-name">Evening (away from meloxicam)</div></div>
-      <div style="text-align:right;font-size:13px;color:var(--ink-muted);">NAC (after surgical clearance)</div>
+      <div style="text-align:right;font-size:13px;color:var(--ink-muted);">NAC (after surgical clearance) · 2nd Methyl Guard Plus cap (after tolerating 1 cap for 2–3 weeks)</div>
     </div>
     <div class="lab-row">
       <div><div class="lab-name">Meloxicam 15mg</div></div>
       <div style="text-align:right;font-size:13px;color:var(--ink-muted);">1x daily with food per prescription · separate from NAC by 2+ hours</div>
+    </div>
+    <div class="lab-row">
+      <div><div class="lab-name">Watch for in first 2–3 weeks</div></div>
+      <div style="text-align:right;font-size:13px;color:var(--ink-muted);">Anxiety · irritability · poor sleep · racing thoughts — if any of these appear, drop to every-other-day dosing and reassess with a practitioner (COMT interaction)</div>
     </div>
   </div>
 </div>
