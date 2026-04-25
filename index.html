@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaitlyn White — Health Profile Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F4EF;
+    --cream-dark: #EDE9E1;
+    --ink: #1C1917;
+    --ink-muted: #57534E;
+    --ink-faint: #A8A29E;
+    --teal: #0F766E;
+    --teal-light: #CCFBF1;
+    --teal-mid: #2DD4BF;
+    --amber: #B45309;
+    --amber-light: #FEF3C7;
+    --amber-mid: #F59E0B;
+    --red: #B91C1C;
+    --red-light: #FEE2E2;
+    --red-mid: #EF4444;
+    --green: #15803D;
+    --green-light: #DCFCE7;
+    --blue: #1D4ED8;
+    --blue-light: #DBEAFE;
+    --bone: #D6CFC4;
+    --border: rgba(28,25,23,0.1);
+    --radius: 12px;
+    --radius-sm: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .header-left { display: flex; align-items: center; gap: 1.5rem; }
+
+  .avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--teal); display: flex; align-items: center;
+    justify-content: center; font-family: 'DM Serif Display', serif;
+    font-size: 22px; color: var(--cream); flex-shrink: 0;
+  }
+
+  .patient-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem; line-height: 1.1; color: var(--cream);
+  }
+
+  .patient-meta {
+    font-size: 13px; color: var(--ink-faint); margin-top: 4px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+
+  .patient-meta span { display: flex; align-items: center; gap: 4px; }
+  .patient-meta span::before { content: '·'; opacity: 0.4; }
+  .patient-meta span:first-child::before { display: none; }
+
+  .header-right { text-align: right; }
+  .header-right .last-updated { font-size: 12px; color: var(--ink-faint); margin-bottom: 6px; }
+
+  /* ── NAV TABS ── */
+  .tab-nav {
+    background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 0 3rem;
+    display: flex; gap: 0; overflow-x: auto;
+  }
+
+  .tab-btn {
+    background: none; border: none; cursor: pointer;
+    color: var(--ink-faint); font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 400; padding: 14px 20px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color 0.15s, border-color 0.15s;
+  }
+
+  .tab-btn:hover { color: var(--cream); }
+  .tab-btn.active { color: var(--teal-mid); border-bottom-color: var(--teal-mid); }
+
+  /* ── LAYOUT ── */
+  .page { display: none; padding: 2.5rem 3rem; max-width: 1200px; }
+  .page.active { display: block; }
+
+  .section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint);
+    margin: 2rem 0 1rem;
+  }
+
+  .section-label:first-child { margin-top: 0; }
+
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .grid4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+
+  /* ── CARDS ── */
+  .card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-family: 'DM Serif Display', serif; font-size: 1rem;
+    color: var(--ink); margin-bottom: 1rem; padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── ALERT BANNERS ── */
+  .banner {
+    border-radius: var(--radius); padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem; border-left: 4px solid;
+  }
+
+  .banner-red { background: var(--red-light); border-color: var(--red); }
+  .banner-amber { background: var(--amber-light); border-color: var(--amber-mid); }
+  .banner-green { background: var(--green-light); border-color: var(--teal); }
+  .banner-blue { background: var(--blue-light); border-color: var(--blue); }
+
+  .banner-title {
+    font-weight: 500; font-size: 14px; margin-bottom: 5px;
+  }
+
+  .banner-red .banner-title { color: var(--red); }
+  .banner-amber .banner-title { color: var(--amber); }
+  .banner-green .banner-title { color: var(--green); }
+  .banner-blue .banner-title { color: var(--blue); }
+
+  .banner p { font-size: 13px; color: var(--ink-muted); line-height: 1.65; }
+
+  /* ── METRIC TILES ── */
+  .metric-tile {
+    background: var(--cream-dark); border-radius: var(--radius);
+    padding: 1.1rem 1.25rem;
+  }
+
+  .metric-tile .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); margin-bottom: 4px; }
+  .metric-tile .value { font-family: 'DM Serif Display', serif; font-size: 1.75rem; color: var(--ink); line-height: 1; }
+  .metric-tile .unit { font-size: 12px; color: var(--ink-muted); margin-top: 3px; }
+  .metric-tile .status-ok { color: var(--teal); font-size: 11px; font-weight: 500; }
+  .metric-tile .status-warn { color: var(--amber); font-size: 11px; font-weight: 500; }
+  .metric-tile .status-alert { color: var(--red); font-size: 11px; font-weight: 500; }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    padding: 2px 8px; border-radius: 4px;
+  }
+
+  .badge-ok { background: var(--green-light); color: var(--green); }
+  .badge-warn { background: var(--amber-light); color: var(--amber); }
+  .badge-alert { background: var(--red-light); color: var(--red); }
+  .badge-info { background: var(--blue-light); color: var(--blue); }
+  .badge-teal { background: var(--teal-light); color: var(--teal); }
+  .badge-neutral { background: var(--cream-dark); color: var(--ink-muted); }
+
+  /* ── LAB ROWS ── */
+  .lab-row {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 12px; align-items: center;
+    padding: 9px 0; border-bottom: 1px solid var(--border);
+  }
+
+  .lab-row:last-child { border-bottom: none; }
+  .lab-name { font-size: 13px; color: var(--ink); }
+  .lab-ref { font-size: 11px; color: var(--ink-faint); margin-top: 1px; }
+  .lab-value { font-size: 15px; font-weight: 500; color: var(--ink); text-align: right; }
+
+  /* ── RANGE BARS ── */
+  .range-bar-wrap { margin: 4px 0 2px; }
+  .range-bg { height: 5px; background: var(--cream-dark); border-radius: 3px; }
+  .range-fill { height: 5px; border-radius: 3px; }
+  .fill-ok { background: var(--teal); }
+  .fill-warn { background: var(--amber-mid); }
+  .fill-low { background: var(--red-mid); }
+  .range-limits { display: flex; justify-content: space-between; font-size: 10px; color: var(--ink-faint); margin-top: 2px; }
+
+  /* ── GENETIC MUTATION CARDS ── */
+  .mut-card {
+    padding: 1rem 0; border-bottom: 1px solid var(--border);
+  }
+
+  .mut-card:last-child { border-bottom: none; }
+
+  .mut-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 7px; }
+  .mut-gene { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--ink); }
+  .mut-rsid { font-size: 11px; color: var(--ink-faint); font-family: monospace; }
+
+  .zygosity-hom { background: var(--red-light); color: var(--red); font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 4px; }
+  .zygosity-het { background: var(--amber-light); color: var(--amber); font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 4px; }
+  .zygosity-ok { background: var(--green-light); color: var(--green); font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 4px; }
+
+  .mut-body { font-size: 13px; color: var(--ink-muted); line-height: 1.65; margin-bottom: 8px; }
+  .mut-action {
+    font-size: 12px; color: var(--teal); background: var(--teal-light);
+    border-radius: var(--radius-sm); padding: 5px 10px; display: inline-block;
+  }
+
+  /* ── SUPPLEMENT ROWS ── */
+  .supp-row {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 0; border-bottom: 1px solid var(--border);
+  }
+
+  .supp-row:last-child { border-bottom: none; }
+
+  .supp-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--teal); color: #fff; font-size: 13px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .supp-name { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+  .supp-detail { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
+  .supp-buy {
+    display: inline-block; margin-top: 6px; font-size: 12px; font-weight: 500;
+    color: var(--teal); background: var(--teal-light); padding: 4px 10px;
+    border-radius: var(--radius-sm); text-decoration: none;
+    transition: background 0.15s;
+  }
+  .supp-buy:hover { background: var(--teal-mid); color: #fff; }
+
+  /* ── ORTHO TIMELINE ── */
+  .timeline { position: relative; padding-left: 1.75rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
+    width: 2px; background: var(--bone);
+  }
+
+  .timeline-item { position: relative; margin-bottom: 1.5rem; }
+  .timeline-item:last-child { margin-bottom: 0; }
+
+  .timeline-dot {
+    position: absolute; left: -1.75rem; top: 5px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--cream); border: 2px solid var(--bone);
+  }
+
+  .timeline-dot.surgery { background: var(--red); border-color: var(--red); }
+  .timeline-dot.procedure { background: var(--amber-mid); border-color: var(--amber-mid); }
+  .timeline-dot.active { background: var(--teal); border-color: var(--teal); }
+
+  .timeline-date { font-size: 11px; color: var(--ink-faint); margin-bottom: 2px; }
+  .timeline-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+  .timeline-body { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
+
+  /* ── NEXT STEPS ── */
+  .next-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+  }
+
+  .next-item:last-child { border-bottom: none; }
+
+  .next-num {
+    font-family: 'DM Serif Display', serif; font-size: 1.2rem;
+    color: var(--bone); flex-shrink: 0; line-height: 1.4; min-width: 20px;
+  }
+
+  .next-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+  .next-body { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  .disclaimer {
+    background: var(--cream-dark); border-top: 1px solid var(--border);
+    padding: 1.5rem 3rem; font-size: 11px; color: var(--ink-faint); line-height: 1.7;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    header, .tab-nav, .page { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .patient-name { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-left">
+    <div class="avatar">KW</div>
+    <div>
+      <div class="patient-name">Kaitlyn White</div>
+      <div class="patient-meta">
+        <span>DOB: 02/26/1988</span>
+        <span>Age 37</span>
+        <span>Female</span>
+        <span>Port Charlotte, FL</span>
+      </div>
+      <div class="patient-meta" style="margin-top:4px;">
+        <span>Primary care: Millennium Physician Group</span>
+        <span>Ortho: Advanced Orthopedic Center / Tulane Medical</span>
+      </div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="last-updated">Last updated: April 2026</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+      <span class="badge badge-alert">Active surgical recovery</span>
+      <span class="badge badge-warn">MTHFR het · SOD2 hom</span>
+      <span class="badge badge-ok">Labs: all normal</span>
+    </div>
+  </div>
+</header>
+
+<!-- TAB NAVIGATION -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('summary')">Overview</button>
+  <button class="tab-btn" onclick="showTab('ortho')">SC Joint History</button>
+  <button class="tab-btn" onclick="showTab('labs')">Lab Results</button>
+  <button class="tab-btn" onclick="showTab('genetics')">Genetics</button>
+  <button class="tab-btn" onclick="showTab('supplements')">Supplement Stack</button>
+  <button class="tab-btn" onclick="showTab('nextsteps')">Next Steps</button>
+</div>
+
+<!-- ══════════════════════════════════
+     TAB 1: OVERVIEW / EXECUTIVE SUMMARY
+     ══════════════════════════════════ -->
+<div id="tab-summary" class="page active">
+
+  <div class="banner banner-red">
+    <div class="banner-title">Active: Left SC joint reconstruction — April 2026</div>
+    <p>Kaitlyn underwent major surgery at Tulane Medical performed by Dr. Felix Savoie (SC reconstruction) and Dr. Roach (vascular surgery). The procedure involved open reduction with gracilis allograft ligament reconstruction, internal stenting with a Synthes clavicle plate, and meticulous debridement of bone fragments from around the subclavian vein and artery. This was the culmination of a decade-long progression from a posterior dislocation sustained in a motorcycle accident. She is now in the post-operative recovery phase — the most complex chapter of this orthopedic journey.</p>
+  </div>
+
+  <div class="banner banner-amber">
+    <div class="banner-title">Genetics: Heterozygous MTHFR C677T + Homozygous SOD2 — moderate-priority stack</div>
+    <p>Her genetic profile is less complex than a homozygous MTHFR presentation. Key actionable variants: heterozygous MTHFR C677T (partial methylation impairment — ~35–40% enzyme reduction), homozygous SOD2 Val16Ala (reduced mitochondrial antioxidant capacity), and heterozygous APOE e2/e3 (favorable lipid profile). No hemochromatosis, no VDR variants of note. Supplement protocol should focus on methylation support and mitochondrial antioxidants — particularly relevant during surgical recovery when oxidative stress is elevated.</p>
+  </div>
+
+  <div class="banner banner-green">
+    <div class="banner-title">Labs (April 1, 2026): All within normal limits</div>
+    <p>Complete CBC, thyroid panel (TSH 1.16, free T4 1.2), HbA1c 4.7%, Vitamin D 67 ng/mL (solidly optimal), and urinalysis — all normal. Estimated average glucose flagged "Low" at 88 mg/dL but this is a derived value appropriate to her metabolic profile. No anemia, no thyroid dysfunction, no infection markers.</p>
+  </div>
+
+  <div class="section-label">At a glance</div>
+  <div class="grid4">
+    <div class="metric-tile">
+      <div class="label">Vitamin D</div>
+      <div class="value">67</div>
+      <div class="unit">ng/mL · optimal ≥30</div>
+      <div class="status-ok">Optimal</div>
+    </div>
+    <div class="metric-tile">
+      <div class="label">HbA1c</div>
+      <div class="value">4.7%</div>
+      <div class="unit">ref: 4.3–5.6%</div>
+      <div class="status-ok">Normal</div>
+    </div>
+    <div class="metric-tile">
+      <div class="label">TSH</div>
+      <div class="value">1.16</div>
+      <div class="unit">mIU/L · ref: 0.40–4.50</div>
+      <div class="status-ok">Normal</div>
+    </div>
+    <div class="metric-tile">
+      <div class="label">Free T4</div>
+      <div class="value">1.2</div>
+      <div class="unit">ng/dL · ref: 0.8–1.8</div>
+      <div class="status-ok">Normal</div>
+    </div>
+    <div class="metric-tile">
+      <div class="label">Hemoglobin</div>
+      <div class="value">13</div>
+      <div class="unit">g/dL · ref: 12–15</div>
+      <div class="status-ok">Normal</div>
+    </div>
+    <div class="metric-tile">
+      <div class="label">WBC</div>
+      <div class="value">7.1</div>
+      <div class="unit">K/uL · ref: 3.6–10</div>
+      <div class="status-ok">Normal</div>
+    </div>
+    <div class="metric-tile">
+      <div class="label">Platelets</div>
+      <div class="value">283</div>
+      <div class="unit">K/uL · ref: 140–440</div>
+      <div class="status-ok">Normal</div>
+    </div>
+    <div class="metric-tile">
+      <div class="label">MTHFR C677T</div>
+      <div class="value" style="font-size:1.2rem;">Het</div>
+      <div class="unit">rs1801133 · TC genotype</div>
+      <div class="status-warn">~35% reduction</div>
+    </div>
+  </div>
+
+  <div class="section-label">Key variants summary</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">Clinically significant variants</div>
+      <div class="lab-row">
+        <div><div class="lab-name">MTHFR C677T</div><div class="lab-ref">Methylation cycle</div></div>
+        <span class="zygosity-het">Heterozygous</span>
+      </div>
+      <div class="lab-row">
+        <div><div class="lab-name">SOD2 Val16Ala</div><div class="lab-ref">Mitochondrial antioxidant</div></div>
+        <span class="zygosity-hom">Homozygous</span>
+      </div>
+      <div class="lab-row">
+        <div><div class="lab-name">GSTP1 Ile105Val</div><div class="lab-ref">Phase II detox</div></div>
+        <span class="zygosity-het">Variant present</span>
+      </div>
+      <div class="lab-row">
+        <div><div class="lab-name">ADD1 Gly460Trp</div><div class="lab-ref">Salt-sensitive BP · CADD 31</div></div>
+        <span class="zygosity-het">Heterozygous</span>
+      </div>
+      <div class="lab-row">
+        <div><div class="lab-name">APOE e2/e3</div><div class="lab-ref">Lipid metabolism (favorable)</div></div>
+        <span class="zygosity-het">Heterozygous</span>
+      </div>
+      <div class="lab-row">
+        <div><div class="lab-name">CFH His402Tyr</div><div class="lab-ref">Macular degeneration risk</div></div>
+        <span class="zygosity-het">Heterozygous</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Favorable / normal variants</div>
+      <div class="lab-row">
+        <div><div class="lab-name">COMT Val158Met</div><div class="lab-ref">Dopamine clearance</div></div>
+        <span class="zygosity-ok">Normal (AA)</span>
+      </div>
+      <div class="lab-row">
+        <div><div class="lab-name">NQO1 Pro187Ser</div><div class="lab-ref">CoQ10 recycling</div></div>
+        <span class="zygosity-ok">Normal (GG)</span>
+      </div>
+      <div class="lab-row">
+        <div><div class="lab-name">LCT/MCM6</div><div class="lab-ref">Lactase persistence</div></div>
+        <span class="zygosity-ok">Homozygous (AA) — dairy fine</span>
+      </div>
+      <div class="lab-row">
+        <div><div class="lab-name">HFE C282Y / H63D</div><div class="lab-ref">Hemochromatosis</div></div>
+        <span class="zygosity-ok">Not detected</span>
+      </div>
+      <div class="lab-row">
+        <div><div class="lab-name">F5 Factor V Leiden</div><div class="lab-ref">Clotting risk</div></div>
+        <span class="zygosity-ok">Normal</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     TAB 2: SC JOINT HISTORY
+     ══════════════════════════════════ -->
+<div id="tab-ortho" class="page">
+
+  <div class="banner banner-red">
+    <div class="banner-title">Surgery completed — April 2026 · Tulane Medical, New Orleans</div>
+    <p>Left SC joint open reduction with gracilis allograft reconstruction and Synthes clavicle plate. Vascular debridement performed by Dr. Roach. Patient extubated and taken to recovery in stable condition with no untoward events. Now in early post-operative recovery phase.</p>
+  </div>
+
+  <div class="section-label">Clinical timeline</div>
+  <div class="card">
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">~2015–2016</div>
+        <div class="timeline-title">Initial injury & first surgery — Sarasota, FL</div>
+        <div class="timeline-body">Posterior sternoclavicular dislocation sustained in a motorcycle accident. Surgical reduction and reconstruction performed by an orthopedic surgeon from Englewood at a Sarasota facility. SC Joint Resection documented in surgical history. Patient initially did well post-operatively.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">~2023 (approx. 2 years prior to Sept 2025 visit)</div>
+        <div class="timeline-title">Symptom recurrence begins</div>
+        <div class="timeline-body">Patient begins experiencing dysphagia, clicking, grinding, and pressure sensation in the chest. Pain rated 6–7/10 on average. Reports feeling motion at the SC joint described as inferior and superior movement. Failed conservative management: Tylenol, NSAIDs, Biofreeze, heat, ice, and physical therapy with minimal improvement.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot procedure"></div>
+        <div class="timeline-date">May 30, 2025 — Advanced Orthopedic Center, Port Charlotte</div>
+        <div class="timeline-title">Evaluation: subluxation, sternoclavicular, left</div>
+        <div class="timeline-body">Seen by Lydmila Melnik, ARNP (signed Dr. Robert Stchur, MD). Exam notable for tenderness at SC joint, well-healed incision, no anterior deformity. X-ray (2 views left shoulder): deformity and osteoarthrosis at SC joint, degenerative changes at AC joint, glenohumeral joint well-maintained. CT ordered for further evaluation. Clinic noted they do not treat SC dislocations — referred to original Sarasota surgeon or thoracic surgery. OTC medication recommended.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">June 3, 2025 — Akumin Port Charlotte</div>
+        <div class="timeline-title">CT sternoclavicular joints without contrast (CPT 73200SC)</div>
+        <div class="timeline-body">Read by Dr. Michael A. Wolf, MD. Findings: chronic fracture deformity of medial left clavicle at SC joint, moderate degenerative change asymmetric to right side, subchondral cysts, calcified bodies about the joint space, osteophyte formation. Surrounding soft tissues unremarkable. Impression: moderate degenerative change of the left SC joint with chronic fracture deformity of the medial left clavicle.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot procedure"></div>
+        <div class="timeline-date">July 31, 2025 — Advanced Orthopedic Center</div>
+        <div class="timeline-title">Aspiration & steroid injection — left SC joint</div>
+        <div class="timeline-body">Seen by Dr. Lee M. James, DO. MRI reviewed: chronic fracture deformity, moderate degenerative change, subchondral cysts, osteophyte formation. Examination: tenderness to palpation left SC joint with asymmetric clavicle vs. right, slight pain with shoulder flexion and internal rotation. Aseptic effusion aspirated. Single injection: 0.5 mL Triamcinolone acetonide 40mg. Meloxicam 15mg prescribed. Patient reported no improvement after 5 days. Dr. Mlnarik noted no surgical options available in practice — planning referral to new sports specialist in September.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">August 5, 2025 — Advanced Orthopedic Center</div>
+        <div class="timeline-title">CT neck review — referral decision: Dr. Buddy Savoie, Tulane</div>
+        <div class="timeline-body">Seen by Dr. Jason M. Mlnarik, DO. CT neck reviewed: posterior translation ~3mm vs. opposite side, chronic sequela of prior posterior SC dislocation repair, no tracheal pressure or deformity. Impression: Dislocation, Sternoclavicular, Closed, Left. No surgical options available at this practice. Referred to Dr. Felix (Buddy) Savoie at Tulane Medical Center, New Orleans — specialist in this rare procedure. Patient trying to find symptom relief; chronic pain associated with prior history. Follow-up instruction: New sports specialist September.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">September 4, 2025 — Advanced Orthopedic Center</div>
+        <div class="timeline-title">Pre-Tulane evaluation — PT ordered, surgical plan discussed</div>
+        <div class="timeline-body">Seen by Dr. Nathan Jia, MD. CT left shoulder reviewed: chronic fracture deformity and degenerative changes of medial clavicle with osteophyte formation. Patient confirmed history of posterior dislocation 10 years ago, fine until 2 years ago when dysphagia and clicking/grinding began. Condition described as very rare and in a precarious location — adjacent to dangerous neurovascular structures. Surgical treatment is an option; referral to Dr. Savoie in New Orleans confirmed. PT/OT prescribed 2–3x/week for 6–8 weeks as bridge to surgical consult. All exercises PRN per therapist.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">September 8, 2025 — Records release authorization</div>
+        <div class="timeline-title">Medical records transferred to Tulane Medical / Dr. Savoie</div>
+        <div class="timeline-body">Patient signed release authorization. Complete file from Advanced Orthopedic Center released to: Dr. Felix Savoie / Tulane Medical, 202 Janet Yulman Way, New Orleans LA 70118. Phone: 504-988-8476. Records covered service dates 09/08/2023 through 09/08/2025.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot surgery"></div>
+        <div class="timeline-date">April 2026 — Tulane Medical Center, New Orleans, LA</div>
+        <div class="timeline-title" style="color: var(--red);">SURGERY: Open reduction + allograft reconstruction of left SC joint</div>
+        <div class="timeline-body">
+          <strong>Surgeons:</strong> Dr. Felix Savoie (SC reconstruction) · Dr. Roach (vascular surgery)<br><br>
+          <strong>Indication:</strong> Chronic posterior dislocation with malunion/nonunion, fragmentation, adhesions to subclavian vein and artery, neurologic symptoms, functional impairment.<br><br>
+          <strong>Procedure (Savoie):</strong> Anterior approach extending prior incision medially and laterally. Extensive dissection through significant deformity and loose fragments. Malunion and nonunion elevated as a unit. Ligaments found essentially non-existent. Multiple bone fragments identified posterior to sternum, adjacent and adherent to subclavian vein and artery. Oscillating saw used to trim deformed medial clavicle to stable base — posterior-directed malformed section resected.<br><br>
+          <strong>Reconstruction:</strong> 3.5mm hole drilled superior-to-inferior through clavicle. Pre-prepared gracilis allograft passed through tunnel. Two adjacent tunnels drilled through sternum, grafts brought posterior-to-anterior, crossed and sutured — creating posterior SC ligament reconstruction. Anterior capsule reconstructed with 1-Vicryl incorporating graft. Synthes lateral clavicle plate (right clavicle used on left) fixed with 4×2.7mm screws (3 locking, 1 non-locking) + 3 sternum screws. Result: complete prevention of posterior clavicle movement.<br><br>
+          <strong>Vascular (Roach):</strong> Meticulous dissection of bone fragments from subclavian vein and artery lining — working behind sternum and around posterior SC joint. All fragments removed without disturbing vascular supply.<br><br>
+          <strong>Closure:</strong> Vancomycin powder, 2-0 Vicryl, 3-0 Monocryl, Steri-Strips, 0.25% Marcaine for post-op pain.<br><br>
+          <strong>Disposition:</strong> Extubated, taken to recovery in stable condition. No untoward events.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section-label">Current medications (at time of records)</div>
+  <div class="card">
+    <div class="lab-row">
+      <div><div class="lab-name">Meloxicam 15mg oral tablet</div><div class="lab-ref">NSAID · 1 PO QD with food · 30 tablets, 2 refills</div></div>
+      <span class="badge badge-warn">Active Rx</span>
+    </div>
+    <div class="lab-row">
+      <div><div class="lab-name">OTC regimen</div><div class="lab-ref">Continue current OTC medication as advised</div></div>
+      <span class="badge badge-neutral">OTC</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     TAB 3: LAB RESULTS
+     ══════════════════════════════════ -->
+<div id="tab-labs" class="page">
+
+  <div style="margin-bottom:1rem;">
+    <p style="font-size:13px;color:var(--ink-muted);">Ordered by Alicia Bisplinghoff, PA · April 1, 2026 · Millennium Physician Group</p>
+  </div>
+
+  <div class="banner banner-green">
+    <div class="banner-title">All results within normal limits</div>
+    <p>Provider note: "The results of your recent tests are within normal limits. We look forward to seeing you at your next appointment."</p>
+  </div>
+
+  <div class="grid2">
+
+    <!-- CBC -->
+    <div class="card">
+      <div class="card-title">Complete blood count</div>
+      <div class="lab-row">
+        <div><div class="lab-name">WBC</div><div class="lab-ref">ref: 3.6–10 K/uL</div></div>
+        <div style="text-align:right;"><div class="lab-value">7.1</div><span class="badge badge-ok">Normal</span></div>
+      </div>
+      <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:54%"></div></div><div class="range-limits"><span>3.6</span><span>10</span></div></div>
+
+      <div class="lab-row">
+        <div><div class="lab-name">RBC</div><div class="lab-ref">ref: 3.9–5.0 M/uL</div></div>
+        <div style="text-align:right;"><div class="lab-value">4.3</div><span class="badge badge-ok">Normal</span></div>
+      </div>
+      <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:36%"></div></div><div class="range-limits"><span>3.9</span><span>5.0</span></div></div>
+
+      <div class="lab-row">
+        <div><div class="lab-name">Hemoglobin</div><div class="lab-ref">ref: 12–15 g/dL</div></div>
+        <div style="text-align:right;"><div class="lab-value">13</div><span class="badge badge-ok">Normal</span></div>
+      </div>
+      <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:33%"></div></div><div class="range-limits"><span>12</span><span>15</span></div></div>
+
+      <div class="lab-row">
+        <div><div class="lab-name">Hematocrit</div><div class="lab-ref">ref: 35–45%</div></div>
+        <div style="text-align:right;"><div class="lab-value">40.1%</div><span class="badge badge-ok">Normal</span></div>
+      </div>
+      <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:51%"></div></div><div class="range-limits"><span>35</span><span>45</span></div></div>
+
+      <div class="lab-row">
+        <div><div class="lab-name">MCV</div><div class="lab-ref">ref: 80–99 fL</div></div>
+        <div style="text-align:right;"><div class="lab-value">94</div><span class="badge badge-ok">Normal</span></div>
+      </div>
+      <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:74%"></div></div><div class="range-limits"><span>80</span><span>99</span></div></div>
+
+      <div class="lab-row">
+        <div><div class="lab-name">MCH</div><div class="lab-ref">ref: 27–33 pg</div></div>
+        <div style="text-align:right;"><div class="lab-value">30.4</div><span class="badge badge-ok">Normal</span></div>
+      </div>
+      <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:57%"></div></div><div class="range-limits"><span>27</span><span>33</span></div></div>
+
+      <div class="lab-row">
+        <div><div class="lab-name">MCHC</div><div class="lab-ref">ref: 32–36 g/dL</div></div>
+        <div style="text-align:right;"><div class="lab-value">32.4</div><span class="badge badge-warn">Low-normal</span></div>
+      </div>
+      <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-warn" style="width:10%"></div></div><div class="range-limits"><span>32</span><span>36</span></div></div>
+
+      <div class="lab-row">
+        <div><div class="lab-name">RDW</div><div class="lab-ref">ref: 11–15%</div></div>
+        <div style="text-align:right;"><div class="lab-value">13.2%</div><span class="badge badge-ok">Normal</span></div>
+      </div>
+      <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:55%"></div></div><div class="range-limits"><span>11</span><span>15</span></div></div>
+
+      <div class="lab-row">
+        <div><div class="lab-name">Nucleated RBC</div><div class="lab-ref">ref: 0–2%</div></div>
+        <div style="text-align:right;"><div class="lab-value">0</div><span class="badge badge-ok">Normal</span></div>
+      </div>
+
+      <div class="lab-row">
+        <div><div class="lab-name">Platelet</div><div class="lab-ref">ref: 140–440 K/uL</div></div>
+        <div style="text-align:right;"><div class="lab-value">283</div><span class="badge badge-ok">Normal</span></div>
+      </div>
+      <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:49%"></div></div><div class="range-limits"><span>140</span><span>440</span></div></div>
+
+      <div class="lab-row">
+        <div><div class="lab-name">MPV</div><div class="lab-ref">ref: 7.4–10.4 fL</div></div>
+        <div style="text-align:right;"><div class="lab-value">8.7</div><span class="badge badge-ok">Normal</span></div>
+      </div>
+      <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:43%"></div></div><div class="range-limits"><span>7.4</span><span>10.4</span></div></div>
+    </div>
+
+    <div>
+      <!-- DIFFERENTIAL -->
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-title">WBC differential</div>
+        <div class="lab-row">
+          <div><div class="lab-name">Neutrophil, absolute</div><div class="lab-ref">ref: 1.5–7.5 K/uL</div></div>
+          <div style="text-align:right;"><div class="lab-value">4.3</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:46%"></div></div><div class="range-limits"><span>1.5</span><span>7.5</span></div></div>
+
+        <div class="lab-row">
+          <div><div class="lab-name">Lymphocyte, absolute</div><div class="lab-ref">ref: 0.8–4.0 K/uL</div></div>
+          <div style="text-align:right;"><div class="lab-value">2.2</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:44%"></div></div><div class="range-limits"><span>0.8</span><span>4.0</span></div></div>
+
+        <div class="lab-row">
+          <div><div class="lab-name">Monocyte, absolute</div><div class="lab-ref">ref: 0.1–1.0 K/uL</div></div>
+          <div style="text-align:right;"><div class="lab-value">0.4</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Eosinophil, absolute</div><div class="lab-ref">ref: 0.1–1.0 K/uL</div></div>
+          <div style="text-align:right;"><div class="lab-value">0.2</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Basophil, absolute</div><div class="lab-ref">ref: 0.0–0.2 K/uL</div></div>
+          <div style="text-align:right;"><div class="lab-value">0.0</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Neutrophil %</div></div>
+          <div style="text-align:right;"><div class="lab-value">60.7%</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Lymphocyte %</div></div>
+          <div style="text-align:right;"><div class="lab-value">30.9%</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Monocyte %</div></div>
+          <div style="text-align:right;"><div class="lab-value">5.3%</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Eosinophil %</div></div>
+          <div style="text-align:right;"><div class="lab-value">2.6%</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Basophil %</div></div>
+          <div style="text-align:right;"><div class="lab-value">0.5%</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+      </div>
+
+      <!-- METABOLIC -->
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-title">Metabolic · Thyroid · Glucose</div>
+        <div class="lab-row">
+          <div><div class="lab-name">HbA1c</div><div class="lab-ref">ref: 4.3–5.6%</div></div>
+          <div style="text-align:right;"><div class="lab-value">4.7%</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:31%"></div></div><div class="range-limits"><span>4.3</span><span>5.6</span></div></div>
+
+        <div class="lab-row">
+          <div><div class="lab-name">Est. avg. glucose</div><div class="lab-ref">ref: 97–140 mg/dL (derived)</div></div>
+          <div style="text-align:right;"><div class="lab-value">88</div><span class="badge badge-info">Below ref range</span></div>
+        </div>
+        <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:0%"></div></div><div class="range-limits"><span>97</span><span>140</span></div></div>
+        <p style="font-size:11px;color:var(--ink-faint);margin-top:4px;">Note: derived value; portal flagged "Low" but consistent with excellent glycemic control at HbA1c 4.7%.</p>
+
+        <div class="lab-row" style="margin-top:8px;">
+          <div><div class="lab-name">TSH</div><div class="lab-ref">ref: 0.40–4.50 mIU/L (age ≥20)</div></div>
+          <div style="text-align:right;"><div class="lab-value">1.16</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:19%"></div></div><div class="range-limits"><span>0.40</span><span>4.50</span></div></div>
+
+        <div class="lab-row">
+          <div><div class="lab-name">Free T4</div><div class="lab-ref">ref: 0.8–1.8 ng/dL</div></div>
+          <div style="text-align:right;"><div class="lab-value">1.2</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:40%"></div></div><div class="range-limits"><span>0.8</span><span>1.8</span></div></div>
+      </div>
+
+      <!-- VITAMIN D + URINALYSIS -->
+      <div class="card">
+        <div class="card-title">Vitamin D · Urinalysis</div>
+        <div class="lab-row">
+          <div><div class="lab-name">Vitamin D, 25-OH Total</div><div class="lab-ref">Optimal: ≥30 ng/mL · Deficient: &lt;20</div></div>
+          <div style="text-align:right;"><div class="lab-value">67</div><span class="badge badge-ok">Optimal</span></div>
+        </div>
+        <div class="range-bar-wrap"><div class="range-bg"><div class="range-fill fill-ok" style="width:73%"></div></div><div class="range-limits"><span>30</span><span>100</span></div></div>
+
+        <div class="lab-row" style="margin-top:8px;">
+          <div><div class="lab-name">Color</div><div class="lab-ref">Normal: yellow</div></div>
+          <div style="text-align:right;"><div class="lab-value" style="font-size:13px;">Colorless</div><span class="badge badge-info">Well hydrated</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Appearance</div><div class="lab-ref">Normal: clear, cloudy</div></div>
+          <div style="text-align:right;"><div class="lab-value" style="font-size:13px;">Clear</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Specific gravity</div><div class="lab-ref">ref: 1.005–1.030</div></div>
+          <div style="text-align:right;"><div class="lab-value">1.009</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">pH</div><div class="lab-ref">ref: 5–8</div></div>
+          <div style="text-align:right;"><div class="lab-value">6</div><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Glucose (urine)</div><div class="lab-ref">Normal: negative</div></div>
+          <div style="text-align:right;"><span class="badge badge-ok">Negative</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Bilirubin</div><div class="lab-ref">Normal: negative</div></div>
+          <div style="text-align:right;"><span class="badge badge-ok">Negative</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Ketone</div><div class="lab-ref">Normal: negative</div></div>
+          <div style="text-align:right;"><span class="badge badge-ok">Negative</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Urobilinogen</div><div class="lab-ref">Normal: normal</div></div>
+          <div style="text-align:right;"><span class="badge badge-ok">Normal</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Protein</div><div class="lab-ref">Normal: negative</div></div>
+          <div style="text-align:right;"><span class="badge badge-ok">Negative</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Nitrite</div><div class="lab-ref">Normal: negative</div></div>
+          <div style="text-align:right;"><span class="badge badge-ok">Negative</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Leukocytes</div><div class="lab-ref">Normal: negative</div></div>
+          <div style="text-align:right;"><span class="badge badge-ok">Negative</span></div>
+        </div>
+        <div class="lab-row">
+          <div><div class="lab-name">Blood (urine)</div><div class="lab-ref">Normal: negative</div></div>
+          <div style="text-align:right;"><span class="badge badge-ok">Negative</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     TAB 4: GENETICS
+     ══════════════════════════════════ -->
+<div id="tab-genetics" class="page">
+
+  <div class="banner banner-blue">
+    <div class="banner-title">Source: GenVue Discovery Variant Report</div>
+    <p>Variants flagged via ClinVar-reviewed submissions. Homozygous (two copies of variant) shown in red. Heterozygous (one copy) in amber. Normal/reference in green. This analysis is for educational and informational purposes only — it does not constitute medical advice, diagnosis, or treatment. Variants indicate risk factors and predispositions, not certainties.</p>
+  </div>
+
+  <div class="section-label">Primary actionable variants</div>
+  <div class="card">
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">MTHFR — C677T (p.Ala222Val)</span>
+        <span class="zygosity-het">Heterozygous (TC)</span>
+        <span class="mut-rsid">rs1801133 · CADD 25.5</span>
+      </div>
+      <div class="mut-body">The MTHFR enzyme converts folate into methylfolate — the active form that drives the methylation cycle affecting homocysteine processing, neurotransmitter synthesis, DNA repair, and detoxification. Heterozygous C677T (TC genotype) reduces enzyme activity by approximately 35–40%, meaningfully less severe than homozygous TT (~65%+ reduction). Practical impact: mildly elevated homocysteine potential and reduced methylation capacity, especially under physiological stress such as surgery, high inflammation, or low dietary folate. Combined with her SOD2 variant and current surgical recovery, methylation support is especially relevant right now. The MTHFR deficiency, thermolabile type is the primary clinical concern.</div>
+      <div class="mut-action">Action: methylfolate (not folic acid) + methylcobalamin B12 + P5P B6 · request homocysteine blood test to confirm functional impact</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">SOD2 — Val16Ala (p.Val16Ala)</span>
+        <span class="zygosity-hom">Homozygous (AA)</span>
+        <span class="mut-rsid">rs4880 · CADD 13.03</span>
+      </div>
+      <div class="mut-body">SOD2 (Superoxide Dismutase 2) is the primary antioxidant enzyme inside mitochondria responsible for neutralizing superoxide radicals before they cause cellular damage. The Val16Ala variant impairs transport of SOD2 into the mitochondrial matrix, reducing its activity — meaning oxidative stress inside cells is less efficiently neutralized. Homozygous AA is associated with elevated mitochondrial oxidative stress load, which is particularly significant post-surgery when tissue repair generates substantial reactive oxygen species. Long-term implications include potential contributions to inflammation, cardiovascular risk, and cancer susceptibility (ClinVar: microvascular complications of diabetes 6).</div>
+      <div class="mut-action">Action: ubiquinol CoQ10 (not ubiquinone) · NAC for glutathione precursor support · Vitamin C + E during recovery · antioxidant-rich diet · prioritize sleep during healing</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">GSTP1 — Ile105Val</span>
+        <span class="zygosity-het">Variant present (heterozygous)</span>
+        <span class="mut-rsid">rs1695 · CADD 0.035</span>
+      </div>
+      <div class="mut-body">GSTP1 (Glutathione S-Transferase Pi 1) is a phase II liver detoxification enzyme that conjugates toxins, carcinogens, and oxidative byproducts with glutathione for excretion. The Ile105Val variant reduces enzyme efficiency. Combined with her SOD2 burden, this means oxidative byproducts may be cleared more slowly than in someone with both variants wild-type. ClinVar associates this with colorectal neoplasm risk at a population level — this is not diagnostic. The practical concern during surgical recovery is drug metabolism and toxin clearance.</div>
+      <div class="mut-action">Action: glutathione support (NAC, glycine, selenium) · cruciferous vegetables (broccoli, kale) upregulate GSTP1 · minimize unnecessary medication load during recovery</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">ADD1 — Gly460Trp</span>
+        <span class="zygosity-het">Heterozygous (AG)</span>
+        <span class="mut-rsid">rs4961 · CADD 31</span>
+      </div>
+      <div class="mut-body">Alpha-Adducin (ADD1) affects sodium-potassium pump activity in kidney tubules, influencing how efficiently the body reabsorbs sodium. The Gly460Trp variant increases sodium reabsorption, creating susceptibility to salt-sensitive hypertension. With a CADD score of 31 (highly pathogenic prediction), this is among the more functionally significant variants in her profile. She does not currently appear hypertensive, but dietary sodium awareness is important preventatively — especially as her cardiovascular system manages surgical recovery stress and vascular manipulation performed by Dr. Roach.</div>
+      <div class="mut-action">Action: moderate dietary sodium, prioritize potassium-rich foods (bananas, avocado, leafy greens), monitor blood pressure monthly</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">APOE — e2/e3 (Arg176Cys)</span>
+        <span class="zygosity-het">Heterozygous (TC)</span>
+        <span class="mut-rsid">rs7412 · CADD 25.1</span>
+      </div>
+      <div class="mut-body">APOE e2 is the rarest APOE allele and generally the most cardiovascular-favorable — associated with lower LDL cholesterol and reduced Alzheimer's risk compared to e3/e3 or any e4-carrying genotype. Her e2/e3 heterozygous status is a cardioprotective finding. However, APOE e2 carriers carry a small elevated risk for type III hyperlipoproteinemia (dysbetalipoproteinemia) if dietary saturated fat intake is high — triglycerides and VLDL can accumulate in susceptible individuals. Annual lipid panels are appropriate monitoring.</div>
+      <div class="mut-action">Favorable overall — annual lipid panel, moderate saturated fat, monitor triglycerides specifically</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">CFH — His402Tyr</span>
+        <span class="zygosity-het">Heterozygous (TC)</span>
+        <span class="mut-rsid">rs1061170</span>
+      </div>
+      <div class="mut-body">Complement Factor H (CFH) regulates the complement immune pathway responsible for clearing cellular debris from the retina. The His402Tyr variant reduces CFH's ability to bind oxidized lipids accumulating in the macula, allowing inflammatory damage to proceed — the primary driver of age-related macular degeneration (AMD). Heterozygous status is a moderate risk factor (not high-penetrance). AMD typically becomes clinically relevant after age 60. This variant is clinically significant per ClinVar: pathogenic, risk factor for Age-related macular degeneration 4 and Basal laminar drusen (autosomal dominant). Because this is autosomal dominant, heterozygous individuals may manifest the condition rather than just being carriers — monitoring is warranted.</div>
+      <div class="mut-action">Action: annual dilated eye exam baseline now · lutein + zeaxanthin supplementation (AREDS2 dosing) · avoid smoking absolutely · UV-protective eyewear</div>
+    </div>
+  </div>
+
+  <div class="section-label">Favorable / normal variants</div>
+  <div class="card">
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">COMT — Val158Met</span>
+        <span class="zygosity-ok">Normal (AA reference allele)</span>
+        <span class="mut-rsid">rs4680 · CADD 13.15</span>
+      </div>
+      <div class="mut-body">COMT breaks down dopamine, norepinephrine, and epinephrine in the prefrontal cortex and peripheral tissues. The reference AA genotype at Val158Met is the "fast COMT" phenotype — efficient catecholamine clearance and normal dopamine signaling. She does not carry the slow COMT variant associated with heightened pain sensitivity, stress reactivity, or elevated dopamine tone. This is a favorable finding for surgical pain management, anesthesia response, and stress recovery.</div>
+      <div class="mut-action">Favorable — standard dopamine/pain response expected, no special considerations for anesthesia recovery</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">NQO1 — Pro187Ser</span>
+        <span class="zygosity-ok">Normal (GG reference allele)</span>
+        <span class="mut-rsid">rs1800566 · CADD 24.8</span>
+      </div>
+      <div class="mut-body">NQO1 (NAD(P)H Quinone Dehydrogenase 1) is a detoxification enzyme that also plays a critical role in recycling CoQ10 from its oxidized to reduced form, and in stabilizing the p53 tumor suppressor protein. The GG reference genotype means she has fully functional NQO1 — no impairment in CoQ10 metabolism from this locus. This means the CoQ10 she takes for SOD2 support will be efficiently recycled and utilized. Contrast with individuals carrying AA at this SNP, who cannot recycle CoQ10 effectively.</div>
+      <div class="mut-action">Favorable — CoQ10 supplementation will be fully effective and well utilized</div>
+    </div>
+
+    <div class="mut-card">
+      <div class="mut-header">
+        <span class="mut-gene">LCT/MCM6 — Lactase persistence</span>
+        <span class="zygosity-ok">Homozygous (AA) — persistence variant</span>
+        <span class="mut-rsid">rs4988235 · CADD 13.46</span>
+      </div>
+      <div class="mut-body">Homozygous AA at rs4988235 means she carries two copies of the lactase persistence allele — genetically well-equipped to digest dairy throughout adulthood. The lactase enzyme remains active rather than declining post-childhood as it does in most of the world's population. No lactose intolerance concerns from a genetic standpoint. Dairy can be freely included in her diet as a protein and calcium source, which is relevant during SC joint bone healing.</div>
+      <div class="mut-action">No action needed — dairy consumption appropriate and beneficial during bone recovery</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     TAB 5: SUPPLEMENT STACK
+     ══════════════════════════════════ -->
+<div id="tab-supplements" class="page">
+
+  <div class="banner banner-amber">
+    <div class="banner-title">Post-surgical clearance required before starting NAC</div>
+    <p>Clear all new supplements with Dr. Savoie's team before initiating. NAC may affect platelet aggregation acutely and should be confirmed safe in the early post-operative window. Methylfolate, B12, D3/K2, and lutein are generally safe to begin immediately but confirm with your surgical team.</p>
+  </div>
+
+  <div class="card">
+    <div class="supp-row">
+      <div class="supp-num">1</div>
+      <div>
+        <div class="supp-name">Methylfolate (L-5-MTHF) — 400–800 mcg daily</div>
+        <div class="supp-detail">Active form of folate that bypasses the MTHFR conversion step entirely. Critical for methylation cycle function, homocysteine-to-methionine conversion, and neurotransmitter synthesis. Post-surgery and during recovery, methylation demand increases. Do not substitute with folic acid — unmetabolized folic acid can accumulate with MTHFR variants and may have adverse effects. Take with food.</div>
+        <a class="supp-buy" href="https://www.amazon.com/s?k=methylfolate+L-5-MTHF+400mcg" target="_blank">Search on Amazon</a>
+      </div>
+    </div>
+
+    <div class="supp-row">
+      <div class="supp-num">2</div>
+      <div>
+        <div class="supp-name">Methylcobalamin B12 — 1,000 mcg daily</div>
+        <div class="supp-detail">Active methylated form of B12 that pairs with methylfolate to complete the methylation cycle. Works synergistically to convert homocysteine to methionine. Methyl form is preferred over cyanocobalamin for MTHFR variant carriers. Sublingual delivery is most bioavailable — dissolve under tongue rather than swallowing. Take in the morning as B12 can be energizing.</div>
+        <a class="supp-buy" href="https://www.amazon.com/s?k=methylcobalamin+B12+1000mcg+sublingual" target="_blank">Search on Amazon</a>
+      </div>
+    </div>
+
+    <div class="supp-row">
+      <div class="supp-num">3</div>
+      <div>
+        <div class="supp-name">Ubiquinol CoQ10 — 200 mg daily</div>
+        <div class="supp-detail">The active reduced form of CoQ10 (ubiquinol vs. ubiquinone) — directly supports mitochondrial antioxidant function downstream of the SOD2 deficiency, helping neutralize reactive oxygen species that SOD2 cannot fully manage. Critical during surgical recovery when oxidative stress is elevated. Her NQO1 is normal so she'll recycle CoQ10 efficiently. Take with a fat-containing meal for optimal absorption.</div>
+        <a class="supp-buy" href="https://www.amazon.com/s?k=ubiquinol+CoQ10+200mg" target="_blank">Search on Amazon</a>
+      </div>
+    </div>
+
+    <div class="supp-row">
+      <div class="supp-num">4</div>
+      <div>
+        <div class="supp-name">NAC (N-Acetyl Cysteine) — 600 mg daily</div>
+        <div class="supp-detail">Rate-limiting precursor to glutathione — the body's master antioxidant and detoxification molecule. Supports both GSTP1 pathway function (phase II liver detox) and SOD2 compensation. Glutathione is also critical for wound healing and immune modulation post-surgery. <strong>Note: Confirm timing with Dr. Savoie before initiating</strong> — NAC can transiently affect platelet aggregation. Do not take within 2 hours of meloxicam.</div>
+        <a class="supp-buy" href="https://www.amazon.com/s?k=NAC+N-Acetyl+Cysteine+600mg" target="_blank">Search on Amazon</a>
+      </div>
+    </div>
+
+    <div class="supp-row">
+      <div class="supp-num">5</div>
+      <div>
+        <div class="supp-name">Lutein + Zeaxanthin — 20 mg / 4 mg daily</div>
+        <div class="supp-detail">Macular pigment carotenoids that concentrate in the retina and macula, acting as both optical blue-light filters and direct antioxidants. Directly protective against AMD progression — the primary risk from her CFH heterozygous variant. Dosing matches AREDS2 clinical trial evidence. Take with a fat-containing meal for absorption — carotenoids are fat-soluble.</div>
+        <a class="supp-buy" href="https://www.amazon.com/s?k=lutein+zeaxanthin+20mg+eye+health+AREDS2" target="_blank">Search on Amazon</a>
+      </div>
+    </div>
+
+    <div class="supp-row">
+      <div class="supp-num">6</div>
+      <div>
+        <div class="supp-name">Vitamin D3 + K2 (MK-7) — 2,000 IU D3 / 100 mcg K2 daily</div>
+        <div class="supp-detail">Maintenance dosing only — her current D level of 67 ng/mL is excellent and does not require loading. K2 (MK-7 form specifically) ensures calcium driven by Vitamin D absorption is directed to bone matrix rather than arterial soft tissue. Particularly relevant during SC joint bone healing post-surgery. Do not increase D dose beyond 2,000 IU given current optimal level — retest in 6 months.</div>
+        <a class="supp-buy" href="https://www.amazon.com/s?k=vitamin+D3+K2+MK7+2000IU" target="_blank">Search on Amazon</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Timing guide</div>
+  <div class="card">
+    <div class="lab-row">
+      <div><div class="lab-name">Morning (with breakfast)</div></div>
+      <div style="text-align:right;font-size:13px;color:var(--ink-muted);">Methylcobalamin B12 (sublingual) · Methylfolate · D3/K2</div>
+    </div>
+    <div class="lab-row">
+      <div><div class="lab-name">With lunch or largest fat-containing meal</div></div>
+      <div style="text-align:right;font-size:13px;color:var(--ink-muted);">Ubiquinol CoQ10 · Lutein + Zeaxanthin</div>
+    </div>
+    <div class="lab-row">
+      <div><div class="lab-name">Evening (away from meloxicam)</div></div>
+      <div style="text-align:right;font-size:13px;color:var(--ink-muted);">NAC (after surgical clearance)</div>
+    </div>
+    <div class="lab-row">
+      <div><div class="lab-name">Meloxicam 15mg</div></div>
+      <div style="text-align:right;font-size:13px;color:var(--ink-muted);">1x daily with food per prescription · separate from NAC by 2+ hours</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     TAB 6: NEXT STEPS
+     ══════════════════════════════════ -->
+<div id="tab-nextsteps" class="page">
+
+  <div class="section-label">Immediate priorities (post-surgical recovery)</div>
+  <div class="card">
+    <div class="next-item">
+      <div class="next-num">1</div>
+      <div>
+        <div class="next-title">Post-op follow-up with Dr. Savoie — Tulane Medical</div>
+        <div class="next-body">Wound check, plate stability assessment, and establishing the PT protocol for SC joint recovery. Get specific timeline for return to normal activity, swimming, and weight-bearing overhead movement. Ask about imaging schedule to confirm hardware positioning.</div>
+      </div>
+    </div>
+    <div class="next-item">
+      <div class="next-num">2</div>
+      <div>
+        <div class="next-title">Clear supplement stack with surgical team</div>
+        <div class="next-body">Specifically confirm NAC timing and safety in the early post-operative window given platelet effects. Methylfolate, B12, D3/K2, and lutein are generally safe to start immediately — but get explicit sign-off before adding any new supplements while on meloxicam and during active wound healing.</div>
+      </div>
+    </div>
+    <div class="next-item">
+      <div class="next-num">3</div>
+      <div>
+        <div class="next-title">Physical therapy — SC joint rehabilitation</div>
+        <div class="next-body">A PT/OT prescription was written by Dr. Jia (2–3x/week, 6–8 weeks) prior to surgery. Post-surgery, a new prescription from Dr. Savoie's team will define the scope. SC joint rehab is specialized — confirm the PT has experience with post-surgical shoulder girdle/clavicle cases specifically.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Lab tests to request at next primary care visit</div>
+  <div class="card">
+    <div class="next-item">
+      <div class="next-num">4</div>
+      <div>
+        <div class="next-title">Homocysteine — most important test given MTHFR C677T</div>
+        <div class="next-body">The only way to know whether her methylation impairment is causing functional problems. Elevated homocysteine (&gt;10 µmol/L) confirms methylation support is needed and guides supplement dosing. Normal homocysteine suggests adequate compensation. Request from Millennium Physician Group — it's a standard blood draw.</div>
+      </div>
+    </div>
+    <div class="next-item">
+      <div class="next-num">5</div>
+      <div>
+        <div class="next-title">Fasting lipid panel (full) — APOE e2/e3 monitoring</div>
+        <div class="next-body">HDL, LDL, triglycerides, and VLDL. APOE e2/e3 warrants a lipid baseline. Specifically watch triglycerides and VLDL for type III hyperlipoproteinemia pattern. Annually going forward. Can be combined with the next routine labs visit.</div>
+      </div>
+    </div>
+    <div class="next-item">
+      <div class="next-num">6</div>
+      <div>
+        <div class="next-title">Vitamin D recheck — 6 months post-surgery</div>
+        <div class="next-body">Current level of 67 ng/mL is excellent. Recheck in approximately 6 months (October 2026) while on maintenance D3/K2 to confirm level is holding. Bone healing from the SC joint procedure requires sustained adequate D levels.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Preventive monitoring</div>
+  <div class="card">
+    <div class="next-item">
+      <div class="next-num">7</div>
+      <div>
+        <div class="next-title">Blood pressure monitoring — ADD1 salt-sensitive risk</div>
+        <div class="next-body">ADD1 Gly460Trp (CADD 31) creates meaningful salt-sensitive hypertension susceptibility. Home cuff readings or pharmacy monitoring monthly. Flag if consistently at or above 125/80. Keep dietary sodium moderate — especially during recovery when sodium intake may increase with processed foods.</div>
+      </div>
+    </div>
+    <div class="next-item">
+      <div class="next-num">8</div>
+      <div>
+        <div class="next-title">Dilated eye exam baseline — CFH macular degeneration risk</div>
+        <div class="next-body">CFH His402Tyr is clinically significant (ClinVar: pathogenic risk factor). AMD manifests typically after 60 but establishing a retinal baseline at age 37 allows tracking changes over time. Annual exams become critical after 50. Find an optometrist or ophthalmologist who performs dilated fundus exams — not just standard vision checks.</div>
+      </div>
+    </div>
+    <div class="next-item">
+      <div class="next-num">9</div>
+      <div>
+        <div class="next-title">Colonoscopy baseline — GSTP1 colorectal neoplasm association</div>
+        <div class="next-body">GSTP1 Ile105Val carries a ClinVar-reviewed association with colorectal neoplasm risk (reviewed by expert panel). Standard colorectal screening begins at age 45 per current guidelines, but a conversation with her primary care provider about whether earlier screening is indicated given this variant is worthwhile at her next visit.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="disclaimer">
+  <strong>Medical Disclaimer:</strong> This health profile dashboard is compiled for informational and educational purposes only. It does not constitute medical advice, diagnosis, or treatment. All supplement decisions, lab interpretations, and clinical decisions should be reviewed with Kaitlyn's treating physicians — particularly Dr. Felix Savoie (surgical recovery, Tulane Medical) and her primary care provider at Millennium Physician Group — before implementation. Genetic variants indicate risk factors and statistical associations, not certainties or diagnoses. Last compiled: April 2026.
+</div>
+
+<script>
+  function showTab(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
